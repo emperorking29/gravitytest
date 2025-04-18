@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0pqaufq6o8rs"]
+
+[ext_resource type="Script" uid="uid://d2swt8sr2r2c4" path="res://scripts/celestial_body.gd" id="1_wfcjp"]
+
+[node name="CelestialBody" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_wfcjp")

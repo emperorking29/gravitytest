@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://lejg3yihspvu"]
+
+[ext_resource type="PackedScene" uid="uid://b0pqaufq6o8rs" path="res://scenes/celestial_body.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://chc0fa3s8s34d" path="res://scripts/universe.gd" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://clon6ifrpb5ce" path="res://assets/sprites/Grey_planet.png" id="4_iywne"]
+[ext_resource type="Texture2D" uid="uid://c6a0do5mlt0lo" path="res://assets/sprites/Red_planet.png" id="4_lbhrr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
+radius = 62.0725
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p57ef"]
+radius = 32.0156
+
+[node name="Game" type="Node2D"]
+
+[node name="Universe" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_yqjtg")
+
+[node name="CelestialBody2" parent="Universe" instance=ExtResource("1_uwrxv")]
+position = Vector2(0, 93)
+bodyMass = 3000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Universe/CelestialBody2"]
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("4_lbhrr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Universe/CelestialBody2"]
+shape = SubResource("CircleShape2D_lbhrr")
+
+[node name="CelestialBody3" parent="Universe" instance=ExtResource("1_uwrxv")]
+position = Vector2(0, -108)
+bodyMass = 1.0
+bodyInitalVelocity = Vector2(200, -10)
+
+[node name="Sprite2D" type="Sprite2D" parent="Universe/CelestialBody3"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("4_iywne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Universe/CelestialBody3"]
+shape = SubResource("CircleShape2D_p57ef")
+
+[node name="Label" type="Label" parent="Universe"]
+offset_left = 175.0
+offset_top = -252.0
+offset_right = 247.0
+offset_bottom = -229.0
+text = "Blablabla"
+
+[node name="Camera2D" type="Camera2D" parent="."]
