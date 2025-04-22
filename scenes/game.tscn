@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://clon6ifrpb5ce" path="res://assets/sprites/Grey_planet.png" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://c6a0do5mlt0lo" path="res://assets/sprites/Red_planet.png" id="4_lbhrr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
-radius = 62.0725
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_p57ef"]
 radius = 32.0156
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbhrr"]
+radius = 62.0725
 
 [node name="Game" type="Node2D"]
 
@@ -17,34 +17,70 @@ radius = 32.0156
 unique_name_in_owner = true
 script = ExtResource("1_yqjtg")
 
-[node name="CelestialBody2" parent="Universe" instance=ExtResource("1_uwrxv")]
-position = Vector2(0, 93)
-bodyMass = 3000.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Universe/CelestialBody2"]
-scale = Vector2(0.06, 0.06)
-texture = ExtResource("4_lbhrr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Universe/CelestialBody2"]
-shape = SubResource("CircleShape2D_lbhrr")
-
-[node name="CelestialBody3" parent="Universe" instance=ExtResource("1_uwrxv")]
+[node name="SmallBody" parent="Universe" instance=ExtResource("1_uwrxv")]
 position = Vector2(0, -108)
 bodyMass = 1.0
 bodyInitalVelocity = Vector2(200, -10)
 
-[node name="Sprite2D" type="Sprite2D" parent="Universe/CelestialBody3"]
+[node name="Sprite2D" type="Sprite2D" parent="Universe/SmallBody"]
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("4_iywne")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Universe/CelestialBody3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Universe/SmallBody"]
 shape = SubResource("CircleShape2D_p57ef")
+
+[node name="BigBody" parent="Universe" instance=ExtResource("1_uwrxv")]
+position = Vector2(0, 93)
+bodyMass = 3000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Universe/BigBody"]
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("4_lbhrr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Universe/BigBody"]
+shape = SubResource("CircleShape2D_lbhrr")
 
 [node name="Label" type="Label" parent="Universe"]
 offset_left = 175.0
 offset_top = -252.0
 offset_right = 247.0
 offset_bottom = -229.0
-text = "Blablabla"
+text = "Force Vector:"
+
+[node name="Button" type="Button" parent="Universe"]
+offset_left = -418.0
+offset_top = -252.0
+offset_right = -285.0
+offset_bottom = -221.0
+text = "Start Simulation"
+
+[node name="Button2" type="Button" parent="Universe"]
+offset_left = -269.0
+offset_top = -252.0
+offset_right = -136.0
+offset_bottom = -221.0
+text = "Reset Scene"
+
+[node name="LineEdit" type="LineEdit" parent="Universe"]
+z_index = 10
+offset_left = -418.0
+offset_top = -198.0
+offset_right = -290.0
+offset_bottom = -167.0
+placeholder_text = "initial vel. x"
+
+[node name="LineEdit2" type="LineEdit" parent="Universe"]
+z_index = 10
+offset_left = -418.0
+offset_top = -151.0
+offset_right = -290.0
+offset_bottom = -120.0
+placeholder_text = "initial vel. y"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="pressed" from="Universe/Button" to="Universe" method="_on_button_pressed"]
+[connection signal="pressed" from="Universe/Button2" to="Universe" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Universe/Button2" to="Universe" method="_on_button_pressed"]
+[connection signal="text_changed" from="Universe/LineEdit" to="Universe" method="_on_line_edit_text_changed"]
+[connection signal="text_changed" from="Universe/LineEdit2" to="Universe" method="_on_line_edit_2_text_changed"]
